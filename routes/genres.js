@@ -1,5 +1,5 @@
 const express = require("express");
-const { Customer, validate } = require("../models/customer");
+const { Genre, validate } = require("../models/genre");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const { error } = validateGenre(req.body);
+  const { error } = validate(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
 });
 
 router.put("/:id", async (req, res) => {
-  const { error } = validateGenre(req.body);
+  const { error } = validate(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
