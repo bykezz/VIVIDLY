@@ -1,8 +1,13 @@
 const express = require("express");
+const mongoose = require("mongoose");
 
 const genres = require("./routes/genres");
 
 const app = express();
+mongoose
+  .connect("mongodb://localhost/vividly")
+  .then(() => console.log("Connected to MongoDB..."))
+  .catch((err) => console.error("Could not connect to MongoDB..."));
 
 app.use(express.json());
 
