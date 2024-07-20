@@ -3,14 +3,17 @@ const express = require("express");
 const Joi = require("joi");
 const router = express.Router();
 
-const genreSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    minlength: 5,
-    maxlength: 50,
-  },
-});
+const Genre = new mongoose.model(
+  "Genre",
+  new mongoose.Schema({
+    name: {
+      type: String,
+      required: true,
+      minlength: 5,
+      maxlength: 50,
+    },
+  })
+);
 
 const genres = [
   { id: 1, name: "Action" },
