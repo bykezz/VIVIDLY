@@ -1,5 +1,5 @@
 const express = require("express");
-const Joi = require("joi");
+const { Customer, validate } = require("../models/customer");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
@@ -60,14 +60,5 @@ router.delete("/:id", async (req, res) => {
   }
   res.send(customer);
 });
-
-const validateCustomer = (customer) => {
-  const schema = {
-    name: Joi.string().min(5).max(50).required(),
-    phone: Joi.string().min(5).max(50).required(),
-    isGold: Joi.Boolean(),
-  };
-  return Joi.validate(customer, schema);
-};
 
 module.exports = router;
