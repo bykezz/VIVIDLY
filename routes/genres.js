@@ -19,6 +19,7 @@ router.get("/", async (req, res) => {
   const genres = await Genre.find().sort("name");
   res.send(genres);
 });
+
 router.post("/", async (req, res) => {
   const { error } = validateGenre(req.body);
   if (error) {
@@ -29,6 +30,7 @@ router.post("/", async (req, res) => {
   genre = await genre.save();
   res.send(genre);
 });
+
 router.put("/:id", async (req, res) => {
   const { error } = validateGenre(req.body);
   if (error) {
