@@ -30,14 +30,18 @@ router.post("/", async (req, res) => {
   res.send(genre);
 });
 router.put("/:id", async (req, res) => {
-  const { error } = validateCourse(req.body);
+  const { error } = validateGenre(req.body);
   if (error) {
     return res.status(400).send(error.details[0].message);
   }
 
-  const genre = await Genre.findByIdAndUpdate(req.params.id, {
-    name: req.body.name,
-  });
+  const genre = await Genre.findByIdAndUpdate(
+    req.params.id,
+    {
+      name: req.body.name,
+    },
+    { new: true }
+  );
 
   if (!genre) {
     return res.status(404).send("The genre with the given ID was not found.");
@@ -55,14 +59,14 @@ router.get("/:id", async (req, res) => {
 });
 
 router.delete("/:id", async (req, res) => {
-  const genre = await Genre.findByIdAndRemove(req.params.id);
+  const genre = await Genre.findByIdAndDelete(req.params.id);
   if (!genre) {
     return res.status(404).send("The genre with the given ID was not found.");
   }
   res.send(genre);
 });
 
-const validateCourse = (genre) => {
+const validateGenre = (genre) => {
   const schema = {
     name: Joi.string().min(3).required(),
   };
