@@ -39,9 +39,14 @@ router.post("/", async (req, res) => {
     },
   });
 
-  new Fawn.Task()
-    .save("rentals", rental)
-    .update("movie", { _id: movie._id }, { $inc: { numberInStock: -1 } });
+  try {
+    new Fawn.Task()
+      .save("rentals", rental)
+      .update("movie", { _id: movie._id }, { $inc: { numberInStock: -1 } })
+      .run();
+  } catch {
+    res.status(500).send("Something failed");
+  }
 
   res.send(rental);
 });
