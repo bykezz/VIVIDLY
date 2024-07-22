@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
       .save("rentals", rental)
       .update("movie", { _id: movie._id }, { $inc: { numberInStock: -1 } })
       .run();
-  } catch {
+  } catch (ex) {
     res.status(500).send("Something failed");
   }
 
