@@ -23,6 +23,8 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+userSchema.methods;
+
 const User = mongoose.model("User", userSchema);
 
 const validateUser = (user) => {
