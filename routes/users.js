@@ -20,10 +20,9 @@ router.post("/", async (req, res) => {
   await user.save();
 
   const token = jwt.sign({ _id: user.id }, config.get("jwtPrivateKey"));
-  res.header(
-    "x-auth-token",
-    token.send(_.pick(user, ["_id", "name", "email"]))
-  );
+  res
+    .header("x-auth-token", token)
+    .send(_.pick(user, ["_id", "name", "email"]));
 });
 
 module.exports = router;
