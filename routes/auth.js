@@ -1,8 +1,8 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const Joi = require("joi");
 const config = require("config");
+const Joi = require("joi");
 const _ = require("lodash");
 const { User } = require("../models/user");
 const mongoose = require("mongoose");
