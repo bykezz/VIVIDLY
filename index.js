@@ -11,10 +11,6 @@ const movies = require("./routes/movies");
 const rentals = require("./routes/rentals");
 const auth = require("./routes/auth");
 
-app.use(function (err, req, res, next) {
-  res.status(500).send("Something failed");
-});
-
 const app = express();
 
 if (!config.get("jwtPrivateKey")) {
@@ -35,6 +31,10 @@ app.use("/api/customers", customers);
 app.use("/api/movies", movies);
 app.use("/api/rentals", rentals);
 app.use("/api/auth", auth);
+
+app.use(function (err, req, res, next) {
+  res.status(500).send("Something failed");
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}....`));
