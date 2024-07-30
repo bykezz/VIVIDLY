@@ -1,8 +1,9 @@
 const winston = require("winston");
 const mongoose = require("mongoose");
+const config = require("config");
 
 module.exports = function () {
   mongoose
-    .connect("mongodb://localhost/vividly")
+    .connect(config.get("db"))
     .then(() => console.log("Connected to MongoDB..."));
 };
